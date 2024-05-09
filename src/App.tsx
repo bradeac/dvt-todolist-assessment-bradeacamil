@@ -1,8 +1,15 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import cn from "classnames";
+
 import "./App.css";
 
+type Todo = {
+  completed: boolean;
+  value: string;
+};
+
 function App() {
-  const [todos, setTodos] = useState<string[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -10,23 +17,38 @@ function App() {
     setInputValue(value);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleAdd = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!inputValue) return;
 
-    setTodos([...todos, inputValue]);
+    setTodos([...todos, { completed: false, value: inputValue }]);
     setInputValue("");
   };
 
-  const handleDelete = (todoToDelete: string) => {
-    setTodos(todos.filter((todo) => todo !== todoToDelete));
+  const handleCheck = (clickedTodo: Todo) => {
+    const newTodos = todos.map((todo) => {
+      if (todo.value === clickedTodo.value) {
+        return {
+          completed: clickedTodo.completed ? false : true,
+          value: todo.value,
+        };
+      }
+
+      return todo;
+    });
+
+    setTodos(newTodos);
+  };
+
+  const handleDelete = (todoToDelete: Todo) => {
+    setTodos(todos.filter((todo) => todo.value !== todoToDelete.value));
   };
 
   return (
     <main>
       <h1 className="mb-16">TODO List</h1>
-      <form className="mb-16" onSubmit={handleSubmit}>
+      <form className="mb-16" onSubmit={handleAdd}>
         <section className="flex items-center gap-4">
           <label htmlFor="todotextinput">I need to do:</label>
           <input
@@ -44,11 +66,23 @@ function App() {
         {todos.map((todo) => (
           <article
             className="flex items-center justify-between mb-2"
-            key={todo}
+            key={todo.value}
           >
-            <div className="flex gap-2">
-              <input id={todo} type="checkbox" />
-              <label htmlFor={todo}>{todo}</label>
+            <div className="flex flex-1 gap-2">
+              <input
+                checked={todo.completed}
+                id={todo.value}
+                onChange={() => handleCheck(todo)}
+                type="checkbox"
+              />
+              <label
+                className={cn("w-full text-left", {
+                  "line-through": todo.completed,
+                })}
+                htmlFor={todo.value}
+              >
+                {todo.value}
+              </label>
             </div>
             <button onClick={() => handleDelete(todo)}>Delete</button>
           </article>
