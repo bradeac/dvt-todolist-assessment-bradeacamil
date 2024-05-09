@@ -25,18 +25,23 @@ function App() {
 
   return (
     <main>
-      <h1>TODO List</h1>
-      <section>
+      <h1 className="mb-16">TODO List</h1>
+      <section className="mb-16">
         {todos.map((todo) => (
-          <article key={todo}>
-            <input id={todo} type="checkbox" />
-            <label htmlFor={todo}>{todo}</label>
+          <article
+            className="flex items-center justify-between mb-2"
+            key={todo}
+          >
+            <div className="flex gap-2">
+              <input id={todo} type="checkbox" />
+              <label htmlFor={todo}>{todo}</label>
+            </div>
             <button onClick={() => handleDelete(todo)}>Delete</button>
           </article>
         ))}
       </section>
       <form onSubmit={handleSubmit}>
-        <section>
+        <section className="flex items-center gap-4">
           <label htmlFor="todotextinput">I need to do:</label>
           <input
             id="todotextinput"
