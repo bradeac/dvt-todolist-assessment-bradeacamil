@@ -28,11 +28,11 @@ function App() {
     setInputValue("");
   };
 
-  const handleCheck = (clickedTodo: Todo) => {
+  const handleCheck = (id: string, completed: boolean) => {
     const newTodos = todos.map((todo) => {
-      if (todo.value === clickedTodo.value) {
+      if (todo.id === id) {
         return {
-          completed: clickedTodo.completed ? false : true,
+          completed: !completed,
           id: todo.id,
           value: todo.value,
         };
@@ -44,8 +44,8 @@ function App() {
     setTodos(newTodos);
   };
 
-  const handleDelete = (todoToDelete: Todo) => {
-    setTodos(todos.filter((todo) => todo.value !== todoToDelete.value));
+  const handleDelete = (id: string) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
@@ -75,7 +75,7 @@ function App() {
               <input
                 checked={todo.completed}
                 id={todo.id}
-                onChange={() => handleCheck(todo)}
+                onChange={() => handleCheck(todo.id, todo.completed)}
                 type="checkbox"
               />
               <label
@@ -87,7 +87,7 @@ function App() {
                 {todo.value}
               </label>
             </div>
-            <button onClick={() => handleDelete(todo)}>Delete</button>
+            <button onClick={() => handleDelete(todo.id)}>Delete</button>
           </article>
         ))}
       </section>
