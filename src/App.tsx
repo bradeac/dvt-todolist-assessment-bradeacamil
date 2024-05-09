@@ -1,10 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import cn from "classnames";
+import { v4 as uuid } from "uuid";
 
 import "./App.css";
 
 type Todo = {
   completed: boolean;
+  id: string;
   value: string;
 };
 
@@ -22,7 +24,7 @@ function App() {
 
     if (!inputValue) return;
 
-    setTodos([...todos, { completed: false, value: inputValue }]);
+    setTodos([...todos, { completed: false, id: uuid(), value: inputValue }]);
     setInputValue("");
   };
 
@@ -31,6 +33,7 @@ function App() {
       if (todo.value === clickedTodo.value) {
         return {
           completed: clickedTodo.completed ? false : true,
+          id: todo.id,
           value: todo.value,
         };
       }
@@ -66,12 +69,12 @@ function App() {
         {todos.map((todo) => (
           <article
             className="flex items-center justify-between mb-2"
-            key={todo.value}
+            key={todo.id}
           >
             <div className="flex flex-1 gap-2">
               <input
                 checked={todo.completed}
-                id={todo.value}
+                id={todo.id}
                 onChange={() => handleCheck(todo)}
                 type="checkbox"
               />
@@ -79,7 +82,7 @@ function App() {
                 className={cn("w-full text-left", {
                   "line-through": todo.completed,
                 })}
-                htmlFor={todo.value}
+                htmlFor={todo.id}
               >
                 {todo.value}
               </label>
