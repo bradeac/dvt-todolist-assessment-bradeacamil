@@ -19,6 +19,10 @@ function App() {
     setInputValue("");
   };
 
+  const handleDelete = (todoToDelete: string) => {
+    setTodos(todos.filter((todo) => todo !== todoToDelete));
+  };
+
   return (
     <main>
       <h1>TODO List</h1>
@@ -27,6 +31,7 @@ function App() {
           <article key={todo}>
             <input id={todo} type="checkbox" />
             <label htmlFor={todo}>{todo}</label>
+            <button onClick={() => handleDelete(todo)}>Delete</button>
           </article>
         ))}
       </section>
