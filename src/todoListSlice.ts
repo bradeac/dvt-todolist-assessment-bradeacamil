@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Todo } from "./types";
 
 export interface TodosState {
@@ -13,10 +13,10 @@ export const todosSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
-    add: (state, action) => {
+    add: (state, action: PayloadAction<Todo>) => {
       state.todos = [...state.todos, action.payload];
     },
-    check: (state, action) => {
+    check: (state, action: PayloadAction<Pick<Todo, "completed" | "id">>) => {
       const newTodos = state.todos.map((todo) => {
         if (todo.id === action.payload.id) {
           return {
@@ -31,8 +31,8 @@ export const todosSlice = createSlice({
 
       state.todos = newTodos;
     },
-    remove: (state, action) => {
-      state.todos = state.todos.filter((todo) => todo.id !== action.payload.id);
+    remove: (state, action: PayloadAction<string>) => {
+      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
   },
 });

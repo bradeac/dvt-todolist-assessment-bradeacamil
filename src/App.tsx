@@ -32,7 +32,7 @@ function App() {
   };
 
   const handleDelete = (id: string) => {
-    dispatch(remove({ id }));
+    dispatch(remove(id));
   };
 
   return (
