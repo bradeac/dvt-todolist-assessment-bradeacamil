@@ -1,13 +1,16 @@
-import { ChangeEvent, FormEvent, useState } from "react";
 import cn from "classnames";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
 
-import { Todo } from "./types";
+import { add, check, remove } from "./todoListSlice";
+import { RootState } from "./store";
 
 import "./App.css";
 
 function App() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const dispatch = useDispatch();
+  const todosList = useSelector((state: RootState) => state.todos);
   const [inputValue, setInputValue] = useState<string>("");
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -20,28 +23,16 @@ function App() {
 
     if (!inputValue) return;
 
-    setTodos([...todos, { completed: false, id: uuid(), value: inputValue }]);
+    dispatch(add({ completed: false, id: uuid(), value: inputValue }));
     setInputValue("");
   };
 
   const handleCheck = (id: string, completed: boolean) => {
-    const newTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return {
-          completed: !completed,
-          id: todo.id,
-          value: todo.value,
-        };
-      }
-
-      return todo;
-    });
-
-    setTodos(newTodos);
+    dispatch(check({ id, completed }));
   };
 
   const handleDelete = (id: string) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    dispatch(remove({ id }));
   };
 
   return (
@@ -62,7 +53,7 @@ function App() {
         </section>
       </form>
       <section className="max-h-[60vh] overflow-y-scroll">
-        {todos.map((todo) => (
+        {todosList.todos.map((todo) => (
           <article
             className="flex items-center justify-between mb-2"
             key={todo.id}
