@@ -1,15 +1,15 @@
 import cn from "classnames";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
 
 import { add, check, remove } from "./todoListSlice";
-import { RootState } from "./store";
+import { RootState, useAppDispatch } from "./store";
 
 import "./App.css";
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const todosList = useSelector((state: RootState) => state.todos);
   const [inputValue, setInputValue] = useState<string>("");
 
