@@ -79,7 +79,7 @@ function App() {
                 type="checkbox"
               />
               <label
-                className={cn("w-full text-left", {
+                className={cn("max-w-60 text-left", {
                   "line-through": todo.completed,
                 })}
                 htmlFor={todo.id}
