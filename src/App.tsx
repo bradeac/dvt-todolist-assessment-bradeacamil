@@ -2,13 +2,9 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import cn from "classnames";
 import { v4 as uuid } from "uuid";
 
-import "./App.css";
+import { Todo } from "./types";
 
-type Todo = {
-  completed: boolean;
-  id: string;
-  value: string;
-};
+import "./App.css";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
