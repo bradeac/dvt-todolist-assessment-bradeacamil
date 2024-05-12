@@ -67,8 +67,8 @@ In order to make the codebase as decoupled and as testable as possible, I decide
 - Redux-connected components
   - these components are coupled to the Redux store
   - they include event handlers and other logic related to the app
-  - they render the dumb UI components to which they pass down to data and event handlers
-  - in order to test these components, the Redux store needs to be mocked
+  - they render the dumb UI components to which they pass down the data and event handlers
+  - in order to test these components, the Redux store is mocked
 
 No matter if you want to swap one of the dumb components with a new one, or maybe you want to swap Redux with another state management library, the UI part and the state and logic part are pretty decoupled, so it's easy to do that.
 Also, I included tests for the dumb components, which test if what's rendered on the screen is correct. And I also included tests related to the Redux-connected components, the Redux store, and the Redux reducers, in order to be sure that the initial state value is correct, that the update logic is correct, and also that the Redux-connected components are correctly connected to the Redux store.
