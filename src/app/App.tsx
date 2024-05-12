@@ -3,7 +3,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
 
-import { add, check, remove } from "./todoListSlice";
+import { add, check, remove } from "../features/todos/todoListSlice";
 import { RootState, useAppDispatch } from "./store";
 
 import "./App.css";
