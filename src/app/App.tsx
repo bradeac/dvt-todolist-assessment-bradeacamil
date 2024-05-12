@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
 
-import { TodoItem } from "../components/TodoItem";
+import { TodoList } from "../components/TodoList";
 import { add } from "../features/todos/todoListSlice";
 import { RootState, useAppDispatch } from "./store";
 
@@ -44,11 +44,7 @@ function App() {
           </button>
         </section>
       </form>
-      <section className="max-h-[60vh] overflow-y-scroll">
-        {todos.map((todo) => (
-          <TodoItem todo={todo} />
-        ))}
-      </section>
+      <TodoList todos={todos} />
     </main>
   );
 }
