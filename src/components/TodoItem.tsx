@@ -4,6 +4,8 @@ import { check, remove } from "../features/todos/todoListSlice";
 import { useAppDispatch } from "../app/store";
 import { Todo } from "../types/Todo.type";
 
+import "./TodoItem.css";
+
 type TodoItemProps = {
   todo: Todo;
 };
@@ -21,16 +23,21 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
 
   return (
     <article className="flex items-center justify-between mb-2" key={todo.id}>
-      <div className="flex flex-1 gap-2">
+      <div className="max-w-60 text-left">
+        {/* <div className="flex flex-1 gap-2"> */}
         <input
           checked={todo.completed}
+          className="mr-4"
           id={todo.id}
           onChange={() => handleCheck(todo.id, todo.completed)}
           type="checkbox"
         />
         <label
-          className={cn("max-w-60 text-left", {
-            "line-through": todo.completed,
+          // className={cn("text-center text", {
+          //   "text-checked": todo.completed,
+          // })}
+          className={cn("max-w-60 text-left todo-text", {
+            "todo-text-active": todo.completed,
           })}
           htmlFor={todo.id}
         >
