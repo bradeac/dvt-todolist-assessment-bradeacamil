@@ -17,12 +17,12 @@ export const todosSlice = createSlice({
     add: (state, action: PayloadAction<Todo>) => {
       state.todos = [...state.todos, action.payload];
     },
-    check: (state, action: PayloadAction<Pick<Todo, "completed" | "id">>) => {
+    check: (state, action: PayloadAction<Pick<Todo, "id">>) => {
       const newTodos = state.todos.map((todo) => {
         if (todo.id === action.payload.id) {
           return {
             ...todo,
-            completed: !action.payload.completed,
+            completed: !todo.completed,
           };
         }
 
@@ -31,8 +31,8 @@ export const todosSlice = createSlice({
 
       state.todos = newTodos;
     },
-    remove: (state, action: PayloadAction<string>) => {
-      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
+    remove: (state, action: PayloadAction<Pick<Todo, "id">>) => {
+      state.todos = state.todos.filter((todo) => todo.id !== action.payload.id);
     },
   },
 });

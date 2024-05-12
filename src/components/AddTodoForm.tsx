@@ -1,11 +1,13 @@
 import { v4 as uuid } from "uuid";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import { add } from "../features/todos/todoListSlice";
-import { useAppDispatch } from "../app/store";
+import { Todo } from "../types/Todo.type";
 
-export const AddTodoForm = () => {
-  const dispatch = useAppDispatch();
+type AddTodoFormProps = {
+  onAdd: (todo: Todo) => void;
+};
+
+export const AddTodoForm = ({ onAdd }: AddTodoFormProps) => {
   const [inputValue, setInputValue] = useState<string>("");
 
   const handleAdd = (event: FormEvent<HTMLFormElement>) => {
@@ -13,7 +15,7 @@ export const AddTodoForm = () => {
 
     if (!inputValue) return;
 
-    dispatch(add({ completed: false, id: uuid(), value: inputValue }));
+    onAdd({ completed: false, id: uuid(), value: inputValue });
     setInputValue("");
   };
 
@@ -23,16 +25,21 @@ export const AddTodoForm = () => {
   };
 
   return (
-    <form className="mb-16" onSubmit={handleAdd}>
+    <form aria-label="add todo form" className="mb-16" onSubmit={handleAdd}>
       <section className="flex items-center gap-4">
         <label htmlFor="todotextinput">I need to do:</label>
         <input
+          aria-label="todo text input"
           id="todotextinput"
           name="TODO text input"
           value={inputValue}
           onChange={handleInputChange}
         />
-        <button disabled={!inputValue} type="submit">
+        <button
+          aria-label="add todo button"
+          disabled={!inputValue}
+          type="submit"
+        >
           Add
         </button>
       </section>
