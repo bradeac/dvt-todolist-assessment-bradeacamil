@@ -1,17 +1,16 @@
-import { ChangeEvent, FormEvent, useState } from "react";
 import cn from "classnames";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
+
+import { add, check, remove } from "./todoListSlice";
+import { RootState, useAppDispatch } from "./store";
 
 import "./App.css";
 
-type Todo = {
-  completed: boolean;
-  id: string;
-  value: string;
-};
-
 function App() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const dispatch = useAppDispatch();
+  const { todos } = useSelector((state: RootState) => state.todos);
   const [inputValue, setInputValue] = useState<string>("");
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -24,28 +23,16 @@ function App() {
 
     if (!inputValue) return;
 
-    setTodos([...todos, { completed: false, id: uuid(), value: inputValue }]);
+    dispatch(add({ completed: false, id: uuid(), value: inputValue }));
     setInputValue("");
   };
 
   const handleCheck = (id: string, completed: boolean) => {
-    const newTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return {
-          completed: !completed,
-          id: todo.id,
-          value: todo.value,
-        };
-      }
-
-      return todo;
-    });
-
-    setTodos(newTodos);
+    dispatch(check({ id, completed }));
   };
 
   const handleDelete = (id: string) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    dispatch(remove(id));
   };
 
   return (
