@@ -34,9 +34,9 @@ I went with the best-practice recommended in the Redux docs. Have a `feature` fo
 ┃ ┃ ┗ `TodoList.tsx` - renders a list of `TodoItem`s  
 ┃ ┣ features  
 ┃ ┃ ┗ todos - contains the Redux slice used to store TODOs and Redux-connected components  
-┃ ┃   ┣ `ConnectedAddTodoForm.tsx` - Redux-connected component containing the interactivity logic for adding a TODO. It renders the dumb `AddTodoForm` component and adding to it interactivity and a link to the Redux store  
-┃ ┃   ┣ `ConnectedTodoList.tsx` - Redux-connected component that renders the dumb `TodoList` component  
-┃ ┃   ┗ `todoListSlice.tsx` - Contains the reducers and an interface represnting the shape of the state stored by Redux  
+┃ ┃ ┃ ┣ `ConnectedAddTodoForm.tsx` - Redux-connected component containing the interactivity logic for adding a TODO. It renders the dumb `AddTodoForm` component and adding to it interactivity and a link to the Redux store  
+┃ ┃ ┃ ┣ `ConnectedTodoList.tsx` - Redux-connected component that renders the dumb `TodoList` component  
+┃ ┃ ┃ ┗ `todoListSlice.tsx` - Contains the reducers and an interface represnting the shape of the state stored by Redux  
 ┃ ┣ test  
 ┃ ┃ ┣ components  
 ┃ ┃ ┃ ┣ `AddTodoForm.test.tsx` - Contains automated tests for the `AddTodoForm` dumb component  
@@ -45,13 +45,13 @@ I went with the best-practice recommended in the Redux docs. Have a `feature` fo
 ┃ ┃ ┃ ┣ `TodoItem.test.tsx` - Contains automated tests for the `TodoItem` dumb component  
 ┃ ┃ ┃ ┗ `TodoList.test.tsx` - Contains automated tests for the `TodoList` dumb component  
 ┃ ┃ ┣ redux  
-┃ ┃ ┃ ┗ reducers  
-┃ ┃ ┃   ┣ `add.test.tsx` - Contains automated tests for the `add` reducer  
-┃ ┃ ┃   ┣ `check.test.tsx` - Contains automated tests for the `check` reducer  
-┃ ┃ ┃   ┗ `remove.test.tsx` - Contains automated tests for the `remove` reducer  
+┃ ┃ ┃ ┣ reducers  
+┃ ┃ ┃ ┃ ┣ `add.test.tsx` - Contains automated tests for the `add` reducer  
+┃ ┃ ┃ ┃ ┣ `check.test.tsx` - Contains automated tests for the `check` reducer  
+┃ ┃ ┃ ┃ ┗ `remove.test.tsx` - Contains automated tests for the `remove` reducer  
 ┃ ┃ ┗ `test-utils.tsx` - Used for mocking the Redux store inside of the automated tests  
 ┗ ┣ types  
-    ┗ `Todo.type.ts` - exports the shape of a TODO object  
+┃ ┃ ┗ `Todo.type.ts` - exports the shape of a TODO object  
 
 
 ## Architecture
