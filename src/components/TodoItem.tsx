@@ -1,38 +1,33 @@
 import cn from "classnames";
 
-import { check, remove } from "../features/todos/todoListSlice";
-import { useAppDispatch } from "../app/store";
 import { Todo } from "../types/Todo.type";
 
 import "./TodoItem.css";
 
 type TodoItemProps = {
+  onCheck: (id: string) => void;
+  onDelete: (id: string) => void;
   todo: Todo;
 };
 
-export const TodoItem = ({ todo }: TodoItemProps) => {
-  const dispatch = useAppDispatch();
-
-  const handleCheck = (id: string, completed: boolean) => {
-    dispatch(check({ id, completed }));
-  };
-
-  const handleDelete = (id: string) => {
-    dispatch(remove(id));
-  };
-
+export const TodoItem = ({ todo, onCheck, onDelete }: TodoItemProps) => {
   return (
-    <article className="flex items-center justify-between mb-2" key={todo.id}>
+    <article
+      aria-label="todo item"
+      className="flex items-center justify-between mb-2"
+    >
       <div className="max-w-60 text-left">
         {/* <div className="flex flex-1 gap-2"> */}
         <input
+          aria-label="todo checkbox"
           checked={todo.completed}
           className="mr-4"
           id={todo.id}
-          onChange={() => handleCheck(todo.id, todo.completed)}
+          onChange={() => onCheck(todo.id)}
           type="checkbox"
         />
         <label
+          aria-label="todo text"
           // className={cn("text-center text", {
           //   "text-checked": todo.completed,
           // })}
@@ -44,7 +39,9 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
           {todo.value}
         </label>
       </div>
-      <button onClick={() => handleDelete(todo.id)}>Delete</button>
+      <button aria-label="todo delete button" onClick={() => onDelete(todo.id)}>
+        Delete
+      </button>
     </article>
   );
 };
