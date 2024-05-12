@@ -1,12 +1,12 @@
-import cn from "classnames";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
 
-import { add, check, remove } from "../features/todos/todoListSlice";
+import { add } from "../features/todos/todoListSlice";
 import { RootState, useAppDispatch } from "./store";
 
 import "./App.css";
+import { TodoItem } from "../components/TodoItem";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -25,14 +25,6 @@ function App() {
 
     dispatch(add({ completed: false, id: uuid(), value: inputValue }));
     setInputValue("");
-  };
-
-  const handleCheck = (id: string, completed: boolean) => {
-    dispatch(check({ id, completed }));
-  };
-
-  const handleDelete = (id: string) => {
-    dispatch(remove(id));
   };
 
   return (
@@ -54,28 +46,7 @@ function App() {
       </form>
       <section className="max-h-[60vh] overflow-y-scroll">
         {todos.map((todo) => (
-          <article
-            className="flex items-center justify-between mb-2"
-            key={todo.id}
-          >
-            <div className="flex flex-1 gap-2">
-              <input
-                checked={todo.completed}
-                id={todo.id}
-                onChange={() => handleCheck(todo.id, todo.completed)}
-                type="checkbox"
-              />
-              <label
-                className={cn("max-w-60 text-left", {
-                  "line-through": todo.completed,
-                })}
-                htmlFor={todo.id}
-              >
-                {todo.value}
-              </label>
-            </div>
-            <button onClick={() => handleDelete(todo.id)}>Delete</button>
-          </article>
+          <TodoItem todo={todo} />
         ))}
       </section>
     </main>
