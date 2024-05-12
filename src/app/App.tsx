@@ -2,11 +2,11 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
 
+import { TodoItem } from "../components/TodoItem";
 import { add } from "../features/todos/todoListSlice";
 import { RootState, useAppDispatch } from "./store";
 
 import "./App.css";
-import { TodoItem } from "../components/TodoItem";
 
 function App() {
   const dispatch = useAppDispatch();
