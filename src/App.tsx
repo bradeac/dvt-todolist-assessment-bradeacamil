@@ -10,7 +10,7 @@ import "./App.css";
 
 function App() {
   const dispatch = useAppDispatch();
-  const todosList = useSelector((state: RootState) => state.todos);
+  const { todos } = useSelector((state: RootState) => state.todos);
   const [inputValue, setInputValue] = useState<string>("");
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +53,7 @@ function App() {
         </section>
       </form>
       <section className="max-h-[60vh] overflow-y-scroll">
-        {todosList.todos.map((todo) => (
+        {todos.map((todo) => (
           <article
             className="flex items-center justify-between mb-2"
             key={todo.id}
