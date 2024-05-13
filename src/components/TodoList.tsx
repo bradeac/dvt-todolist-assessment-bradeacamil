@@ -14,7 +14,7 @@ export const TodoList = ({
 }: TodoListProps) => (
   <section
     aria-label="to do list section"
-    className="max-h-[60vh] overflow-y-scroll"
+    className="max-h-[50vh] overflow-y-scroll"
   >
     {todos.map((todo) => (
       <TodoItem

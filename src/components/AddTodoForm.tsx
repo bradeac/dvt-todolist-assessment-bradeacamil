@@ -23,7 +23,7 @@ export const AddTodoForm = ({ onAdd }: AddTodoFormProps) => {
 
   return (
     <form aria-label="add to do form" className="mb-16" onSubmit={handleAdd}>
-      <section className="flex items-center gap-4">
+      <section className="flex items-center justify-between gap-4 px-4 max-[450px]:flex-col">
         <label htmlFor="todotextinput">I need to do:</label>
         <input
           aria-label="to do text input"
