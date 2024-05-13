@@ -18,7 +18,6 @@ export const TodoItem = ({ todo, onCheck, onDelete }: TodoItemProps) => {
       className="flex items-center justify-between gap-8 px-4 mb-2 max-[400px]:items-stretch max-[400px]:flex-col max-[400px]:mb-8 max-[400px]:gap-2"
     >
       <div className="max-w-60 text-left">
-        {/* <div className="flex flex-1 gap-2"> */}
         <input
           aria-label="to do checkbox"
           checked={todo.completed}
@@ -29,9 +28,6 @@ export const TodoItem = ({ todo, onCheck, onDelete }: TodoItemProps) => {
         />
         <label
           aria-label="to do text"
-          // className={cn("text-center text", {
-          //   "text-checked": todo.completed,
-          // })}
           className={cn("break-word max-w-60 text-left todo-text", {
             "todo-text-active": todo.completed,
           })}
