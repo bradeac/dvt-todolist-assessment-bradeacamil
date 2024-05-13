@@ -2,6 +2,11 @@
 
 Automated tests status: [![GitHub Actions Test Run](https://github.com/bradeac/dvt-todolist-assessment-bradeacamil/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/bradeac/dvt-todolist-assessment-bradeacamil/actions/workflows/main.yml)
 
+## Run locally
+
+- npm i
+- npm run dev
+
 ## Features
 
 The TODO app starts with an empty list of TODOs.
