@@ -2,7 +2,7 @@ import { fireEvent, screen } from "@testing-library/react";
 
 import { add } from "../../features/todos/todoListSlice";
 import { ConnectedAddTodoForm } from "../../features/todos/ConnectedAddTodoForm";
-import { renderWithProviders } from "../test-utils";
+import { renderWithProviders } from "../redux-test-utils";
 import { setupStore } from "../../app/store";
 
 test("Expect ConnectedAddTodoForm to be connected to Redux store and add a TODO to the empty store", async () => {

@@ -2,7 +2,7 @@ import { fireEvent, screen } from "@testing-library/react";
 
 import { add } from "../../features/todos/todoListSlice";
 import { ConnectedTodoList } from "../../features/todos/ConnectedTodoList";
-import { renderWithProviders } from "../test-utils";
+import { renderWithProviders } from "../redux-test-utils";
 import { setupStore } from "../../app/store";
 
 const NUMBER_OF_TODOS = 10;
