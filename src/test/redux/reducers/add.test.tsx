@@ -1,27 +1,23 @@
+import { v4 as uuid } from "uuid";
+
 import reducer, {
   add,
   TodosState,
 } from "../../../features/todos/todoListSlice";
-import { v4 as uuid } from "uuid";
+import generateMockTodos from "../../../utils/generateMockTodos";
 
 const NUMBER_OF_TODOS = 10;
-const todo = { completed: false, id: uuid(), value: "TODO item" };
+const mockTodo = { completed: false, id: uuid(), value: "TODO item" };
 
 test("Expect to add a TODO to an empty list", () => {
   const previousState: TodosState = { todos: [] };
 
-  expect(reducer(previousState, add(todo))).toEqual({ todos: [todo] });
+  expect(reducer(previousState, add(mockTodo))).toEqual({ todos: [mockTodo] });
 });
 
 test("Expect to add a TODO to a list of existing TODOs", () => {
   const previousState: TodosState = {
-    todos: Array.from(Array(NUMBER_OF_TODOS).keys()).map((index) => {
-      return {
-        completed: index % 2 === 0 ? true : false,
-        id: index.toString(),
-        value: `TODO item no. ${index}`,
-      };
-    }),
+    todos: generateMockTodos(NUMBER_OF_TODOS),
   };
   const todoToBeAdded = { completed: false, id: uuid(), value: "Added TODO" };
 

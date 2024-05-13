@@ -13,8 +13,8 @@ export const TodoList = ({
   onItemDelete,
 }: TodoListProps) => (
   <section
-    aria-label="todo list section"
-    className="max-h-[60vh] overflow-y-scroll"
+    aria-label="to do list section"
+    className="max-h-[50vh] overflow-y-scroll"
   >
     {todos.map((todo) => (
       <TodoItem

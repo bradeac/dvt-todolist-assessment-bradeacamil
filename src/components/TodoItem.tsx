@@ -14,13 +14,13 @@ type TodoItemProps = {
 export const TodoItem = ({ todo, onCheck, onDelete }: TodoItemProps) => {
   return (
     <article
-      aria-label="todo item"
-      className="flex items-center justify-between mb-2"
+      aria-label="to do item"
+      className="flex items-center justify-between gap-8 px-4 mb-2 break-all max-[400px]:flex-col max-[400px]:mb-8 max-[400px]:gap-2"
     >
       <div className="max-w-60 text-left">
         {/* <div className="flex flex-1 gap-2"> */}
         <input
-          aria-label="todo checkbox"
+          aria-label="to do checkbox"
           checked={todo.completed}
           className="mr-4"
           id={todo.id}
@@ -28,7 +28,7 @@ export const TodoItem = ({ todo, onCheck, onDelete }: TodoItemProps) => {
           type="checkbox"
         />
         <label
-          aria-label="todo text"
+          aria-label="to do text"
           // className={cn("text-center text", {
           //   "text-checked": todo.completed,
           // })}
@@ -40,7 +40,10 @@ export const TodoItem = ({ todo, onCheck, onDelete }: TodoItemProps) => {
           {todo.value}
         </label>
       </div>
-      <button aria-label="todo delete button" onClick={() => onDelete(todo.id)}>
+      <button
+        aria-label="to do delete button"
+        onClick={() => onDelete(todo.id)}
+      >
         Delete
       </button>
     </article>

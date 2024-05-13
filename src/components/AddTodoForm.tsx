@@ -1,10 +1,7 @@
-import { v4 as uuid } from "uuid";
-import React, { ChangeEvent, FormEvent, useState } from "react";
-
-import { Todo } from "../types/Todo.type";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 type AddTodoFormProps = {
-  onAdd: (todo: Todo) => void;
+  onAdd: (todoText: string) => void;
 };
 
 export const AddTodoForm = ({ onAdd }: AddTodoFormProps) => {
@@ -15,7 +12,7 @@ export const AddTodoForm = ({ onAdd }: AddTodoFormProps) => {
 
     if (!inputValue) return;
 
-    onAdd({ completed: false, id: uuid(), value: inputValue });
+    onAdd(inputValue);
     setInputValue("");
   };
 
@@ -25,18 +22,19 @@ export const AddTodoForm = ({ onAdd }: AddTodoFormProps) => {
   };
 
   return (
-    <form aria-label="add todo form" className="mb-16" onSubmit={handleAdd}>
-      <section className="flex items-center gap-4">
+    <form aria-label="add to do form" className="mb-16" onSubmit={handleAdd}>
+      <section className="flex items-center justify-between gap-4 px-4 max-[450px]:flex-col">
         <label htmlFor="todotextinput">I need to do:</label>
         <input
-          aria-label="todo text input"
+          aria-label="to do text input"
+          autoComplete="off"
           id="todotextinput"
           name="TODO text input"
           value={inputValue}
           onChange={handleInputChange}
         />
         <button
-          aria-label="add todo button"
+          aria-label="add to do button"
           disabled={!inputValue}
           type="submit"
         >

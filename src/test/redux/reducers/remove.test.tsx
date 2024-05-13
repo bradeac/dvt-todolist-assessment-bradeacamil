@@ -2,31 +2,30 @@ import reducer, {
   remove,
   TodosState,
 } from "../../../features/todos/todoListSlice";
+import generateMockTodos from "../../../utils/generateMockTodos";
+import { generateRandomNumber } from "../../../utils/generateRandomNumbers";
 
 const NUMBER_OF_TODOS = 10;
 
 test("Call remove reducer with a TODO id and expect TODO to be removed from the store", () => {
-  const previousState: TodosState = {
-    todos: Array.from(Array(NUMBER_OF_TODOS).keys()).map((index) => {
-      return {
-        completed: index % 2 === 0 ? true : false,
-        id: index.toString(),
-        value: `TODO item no. ${index}`,
-      };
-    }),
+  const toBeDeletedTodoIndex = generateRandomNumber(0, NUMBER_OF_TODOS);
+  const initialState: TodosState = {
+    todos: generateMockTodos(NUMBER_OF_TODOS),
   };
-  const toBeDeletedTodoIndex = 6;
 
-  // expect the store to be equal with the previousState without the element on toBeDeletedTodoIndex
-  expect(
-    reducer(previousState, remove({ id: toBeDeletedTodoIndex.toString() }))
-  ).toEqual({
+  // expect the store to be equal with the initialState without
+  // the element on toBeDeletedTodoIndex
+  const expectedState: TodosState = {
     todos: [
-      ...previousState.todos.slice(0, toBeDeletedTodoIndex),
-      ...previousState.todos.slice(
+      ...initialState.todos.slice(0, toBeDeletedTodoIndex),
+      ...initialState.todos.slice(
         toBeDeletedTodoIndex + 1,
-        previousState.todos.length
+        initialState.todos.length
       ),
     ],
-  });
+  };
+
+  expect(
+    reducer(initialState, remove({ id: toBeDeletedTodoIndex.toString() }))
+  ).toEqual(expectedState);
 });

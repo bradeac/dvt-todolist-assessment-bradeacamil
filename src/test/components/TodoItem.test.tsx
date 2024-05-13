@@ -5,7 +5,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { v4 as uuid } from "uuid";
 
 import { TodoItem } from "../../components/TodoItem";
-// import { Todo } from "../types/Todo.type";
 
 const TODO_ID = uuid();
 
@@ -32,7 +31,7 @@ test("Expect TODO checkbox to be rendered", async () => {
   );
 
   expect(
-    screen.getByRole("checkbox", { name: "todo checkbox" })
+    screen.getByRole("checkbox", { name: "to do checkbox" })
   ).toBeInTheDocument();
 });
 
@@ -41,7 +40,7 @@ test("Expect TODO text to be rendered", async () => {
     <TodoItem todo={mock} onCheck={mockOnCheck} onDelete={mockOnDelete} />
   );
 
-  expect(screen.getByText(mock.value)).toBeInTheDocument();
+  expect(screen.getByLabelText(mock.value)).toBeInTheDocument();
 });
 
 test("Expect TODO delete button to be rendered", async () => {
@@ -50,7 +49,7 @@ test("Expect TODO delete button to be rendered", async () => {
   );
 
   expect(
-    screen.getByRole("button", { name: "todo delete button" })
+    screen.getByRole("button", { name: "to do delete button" })
   ).toBeInTheDocument();
 });
 
@@ -129,7 +128,7 @@ test("Expect onDelete to be called when clicking on a TODO delete button", async
     <TodoItem todo={mock} onCheck={mockOnCheck} onDelete={mockOnDelete} />
   );
 
-  const button = screen.getByRole("button", { name: "todo delete button" });
+  const button = screen.getByRole("button", { name: "to do delete button" });
 
   fireEvent.click(button);
 

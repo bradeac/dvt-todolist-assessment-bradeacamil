@@ -27,7 +27,7 @@ test("Expect component to be rendered", async () => {
   );
 
   expect(
-    screen.getByRole("region", { name: "todo list section" })
+    screen.getByRole("region", { name: "to do list section" })
   ).toBeInTheDocument();
 });
 
@@ -40,7 +40,7 @@ test("Expect component to render a list of TodoItem components with the correct 
     />
   );
 
-  expect(screen.getAllByRole("article", { name: "todo item" })).toHaveLength(
+  expect(screen.getAllByRole("article", { name: "to do item" })).toHaveLength(
     NUMBER_OF_TODOS
   );
 });
