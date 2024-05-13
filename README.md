@@ -15,6 +15,8 @@ You can add as many TODOs as you want. Each TODO can be clicked in order to be m
 
 TODOs aren't stored when the windows is closed.
 
+There is a built-in light theme and dark theme which cannot be switched manually, it's set based on what theme preference you have inside your OS settings.
+
 ## Tech stack
 
 - Vite (to scaffold the project)
