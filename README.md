@@ -43,7 +43,7 @@ I went with the best-practice recommended in the Redux docs. Have a `feature` fo
 ┃ ┃ ┗ todos - contains the Redux slice used to store TODOs and Redux-connected components  
 ┃ ┃ ┃ ┣ `ConnectedAddTodoForm.tsx` - Redux-connected component containing the interactivity logic for adding a TODO. It renders the dumb `AddTodoForm` component and adding to it interactivity and a link to the Redux store  
 ┃ ┃ ┃ ┣ `ConnectedTodoList.tsx` - Redux-connected component that renders the dumb `TodoList` component  
-┃ ┃ ┃ ┗ `todoListSlice.tsx` - Contains the reducers and an interface represnting the shape of the state stored by Redux  
+┃ ┃ ┗ ┗ `todoListSlice.tsx` - Contains the reducers and an interface represnting the shape of the state stored by Redux  
 ┃ ┣ test  
 ┃ ┃ ┣ components  
 ┃ ┃ ┃ ┣ `AddTodoForm.test.tsx` - Contains automated tests for the `AddTodoForm` dumb component  
@@ -55,16 +55,16 @@ I went with the best-practice recommended in the Redux docs. Have a `feature` fo
 ┃ ┃ ┃ ┣ reducers  
 ┃ ┃ ┃ ┃ ┣ `add.test.tsx` - Contains automated tests for the `add` reducer  
 ┃ ┃ ┃ ┃ ┣ `check.test.tsx` - Contains automated tests for the `check` reducer  
-┃ ┃ ┃ ┃ ┗ `remove.test.tsx` - Contains automated tests for the `remove` reducer  
-┃ ┃ ┃ ┣ utils  
-┃ ┃ ┃ ┃ ┣ `generateMockTodos.test.ts` - Contains automated tests for the `generateMockTodos` utility function  
-┃ ┃ ┃ ┃ ┗ `generateRandomNumbers.test.ts` - Contains automated tests for the `generateRandomNumbers` utility function  
+┃ ┃ ┃ ┗ ┗ `remove.test.tsx` - Contains automated tests for the `remove` reducer  
+┃ ┃ ┣ utils  
+┃ ┃ ┃ ┣ `generateMockTodos.test.ts` - Contains automated tests for the `generateMockTodos` utility function  
+┃ ┃ ┃ ┗ `generateRandomNumbers.test.ts` - Contains automated tests for the `generateRandomNumbers` utility function  
 ┃ ┃ ┗ `test-utils.tsx` - Used for mocking the Redux store inside of the automated tests  
 ┗ ┣ types  
 ┃ ┃ ┗ `Todo.type.ts` - exports the shape of a TODO object  
 ┃ ┣ utils - Contains utility functions used inside the automated tests  
 ┃ ┃ ┣ `generateMockTodos.tsx` - Used to generate a predefined number of mock TODOs  
-┃ ┃ ┗ `generateRandomNumbers.tsx` - Used to generate a different types of random numbers  
+┗ ┗ ┗ `generateRandomNumbers.tsx` - Used to generate a different types of random numbers  
 
 
 ## Architecture
