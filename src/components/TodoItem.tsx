@@ -12,7 +12,7 @@ export const TodoItem = ({ todo, onCheck, onDelete }: TodoItemProps) => {
   return (
     <article
       aria-label="to do item"
-      className="flex items-center justify-between gap-8 px-4 mb-2 break-all max-[400px]:flex-col max-[400px]:mb-8 max-[400px]:gap-2"
+      className="flex items-center justify-between gap-8 px-4 mb-2 max-[400px]:items-stretch max-[400px]:flex-col max-[400px]:mb-8 max-[400px]:gap-2"
     >
       <div className="flex flex-1 gap-2">
         <input
@@ -24,7 +24,7 @@ export const TodoItem = ({ todo, onCheck, onDelete }: TodoItemProps) => {
         />
         <label
           aria-label="to do text"
-          className={cn("max-w-60 text-left", {
+          className={cn("break-word max-w-60 text-left", {
             "line-through": todo.completed,
           })}
           htmlFor={todo.id}
