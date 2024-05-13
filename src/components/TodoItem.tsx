@@ -24,7 +24,7 @@ export const TodoItem = ({ todo, onCheck, onDelete }: TodoItemProps) => {
         />
         <label
           aria-label="to do text"
-          className={cn("break-word max-w-60 text-left", {
+          className={cn("break-word max-w-60 w-full text-left", {
             "line-through": todo.completed,
           })}
           htmlFor={todo.id}
