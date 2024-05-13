@@ -56,9 +56,15 @@ I went with the best-practice recommended in the Redux docs. Have a `feature` fo
 ┃ ┃ ┃ ┃ ┣ `add.test.tsx` - Contains automated tests for the `add` reducer  
 ┃ ┃ ┃ ┃ ┣ `check.test.tsx` - Contains automated tests for the `check` reducer  
 ┃ ┃ ┃ ┃ ┗ `remove.test.tsx` - Contains automated tests for the `remove` reducer  
+┃ ┃ ┃ ┣ utils  
+┃ ┃ ┃ ┃ ┣ `generateMockTodos.test.ts` - Contains automated tests for the `generateMockTodos` utility function  
+┃ ┃ ┃ ┃ ┗ `generateRandomNumbers.test.ts` - Contains automated tests for the `generateRandomNumbers` utility function  
 ┃ ┃ ┗ `test-utils.tsx` - Used for mocking the Redux store inside of the automated tests  
 ┗ ┣ types  
 ┃ ┃ ┗ `Todo.type.ts` - exports the shape of a TODO object  
+┃ ┣ utils - Contains utility functions used inside the automated tests  
+┃ ┃ ┣ `generateMockTodos.tsx` - Used to generate a predefined number of mock TODOs  
+┃ ┃ ┗ `generateRandomNumbers.tsx` - Used to generate a different types of random numbers  
 
 
 ## Architecture
