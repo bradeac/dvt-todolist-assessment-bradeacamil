@@ -4,8 +4,8 @@ Automated tests status: [![GitHub Actions Test Run](https://github.com/bradeac/d
 
 ## Run locally
 
-- npm i
-- npm run dev
+- `npm i`
+- `npm run dev`
 
 ## Features
 
@@ -14,6 +14,8 @@ The TODO app starts with an empty list of TODOs.
 You can add as many TODOs as you want. Each TODO can be clicked in order to be marked as done and also each TODO can be deleted.
 
 TODOs aren't stored when the windows is closed.
+
+There is a built-in light theme and dark theme which cannot be switched manually, it's set based on what theme preference you have inside your OS settings.
 
 ## Tech stack
 
@@ -29,34 +31,40 @@ TODOs aren't stored when the windows is closed.
 I went with the best-practice recommended in the Redux docs. Have a `feature` folder where you have a folder for each feature of the app, each feature being represented by a Redux slice. In this particular case, it might be a bit overkill, but on the other hand, it's quite easy to extend this TODO list app and add other features to it because of this folder structure.
 
 ┣ src  
-┃ ┣ app  
-┃ ┃ ┣ `App.css` - containing some general styles applied to the whole app  
-┃ ┃ ┗ `App.tsx` - rendering the `main` element, containing the app header, add TODO form, and TODO list  
-┃ ┃ ┗ `store.ts` - containing the Redux store  
-┃ ┣ components - contains dumb UI components  
-┃ ┃ ┣ `AddTodoForm.tsx` - renders the UI part of the form used to add TODOs  
-┃ ┃ ┣ `TodoItem.tsx` - renders a TODO item  
-┃ ┃ ┗ `TodoList.tsx` - renders a list of `TodoItem`s  
-┃ ┣ features  
-┃ ┃ ┗ todos - contains the Redux slice used to store TODOs and Redux-connected components  
-┃ ┃ ┃ ┣ `ConnectedAddTodoForm.tsx` - Redux-connected component containing the interactivity logic for adding a TODO. It renders the dumb `AddTodoForm` component and adding to it interactivity and a link to the Redux store  
-┃ ┃ ┃ ┣ `ConnectedTodoList.tsx` - Redux-connected component that renders the dumb `TodoList` component  
-┃ ┃ ┃ ┗ `todoListSlice.tsx` - Contains the reducers and an interface represnting the shape of the state stored by Redux  
-┃ ┣ test  
-┃ ┃ ┣ components  
-┃ ┃ ┃ ┣ `AddTodoForm.test.tsx` - Contains automated tests for the `AddTodoForm` dumb component  
-┃ ┃ ┃ ┣ `ConnectedAddTodoForm.test.tsx` - Contains automated tests for the `ConnectedAddTodoForm` component  
-┃ ┃ ┃ ┣ `ConnectedTodoList.test.tsx` - Contains automated tests for the `ConnectedTodoList` component  
-┃ ┃ ┃ ┣ `TodoItem.test.tsx` - Contains automated tests for the `TodoItem` dumb component  
-┃ ┃ ┃ ┗ `TodoList.test.tsx` - Contains automated tests for the `TodoList` dumb component  
-┃ ┃ ┣ redux  
-┃ ┃ ┃ ┣ reducers  
-┃ ┃ ┃ ┃ ┣ `add.test.tsx` - Contains automated tests for the `add` reducer  
-┃ ┃ ┃ ┃ ┣ `check.test.tsx` - Contains automated tests for the `check` reducer  
-┃ ┃ ┃ ┃ ┗ `remove.test.tsx` - Contains automated tests for the `remove` reducer  
-┃ ┃ ┗ `test-utils.tsx` - Used for mocking the Redux store inside of the automated tests  
-┗ ┣ types  
-┃ ┃ ┗ `Todo.type.ts` - exports the shape of a TODO object  
+┃ ┣ **app**  
+┃ ┃ ┣ `App.css` - *containing some general styles applied to the whole app*  
+┃ ┃ ┗ `App.tsx` - *rendering the `main` element, containing the app header, add TODO form, and TODO list*  
+┃ ┃ ┗ `store.ts` - *containing the Redux store*  
+┃ ┣ **components** - *contains dumb UI components*  
+┃ ┃ ┣ `AddTodoForm.tsx` - *renders the UI part of the form used to add TODOs*  
+┃ ┃ ┣ `TodoItem.tsx` - *renders a TODO item*  
+┃ ┃ ┗ `TodoList.tsx` - *renders a list of `TodoItem`s*  
+┃ ┣ **features**  
+┃ ┃ ┗ **todos** - *contains the Redux slice used to store TODOs and Redux-connected components*  
+┃ ┃ ┃ ┣ `ConnectedAddTodoForm.tsx` - *Redux-connected component containing the interactivity logic for adding a TODO. It renders the dumb `AddTodoForm` component and adding to it interactivity and a link to the Redux store*  
+┃ ┃ ┃ ┣ `ConnectedTodoList.tsx` - *Redux-connected component that renders the dumb `TodoList` component*  
+┃ ┃ ┗ ┗ `todoListSlice.tsx` - *Contains the reducers and an interface represnting the shape of the state stored by Redux*  
+┃ ┣ **test**  
+┃ ┃ ┣ **components**  
+┃ ┃ ┃ ┣ `AddTodoForm.test.tsx` - *Contains automated tests for the `AddTodoForm` dumb component*  
+┃ ┃ ┃ ┣ `ConnectedAddTodoForm.test.tsx` - *Contains automated tests for the `ConnectedAddTodoForm` component*  
+┃ ┃ ┃ ┣ `ConnectedTodoList.test.tsx` - *Contains automated tests for the `ConnectedTodoList` component*  
+┃ ┃ ┃ ┣ `TodoItem.test.tsx` - *Contains automated tests for the `TodoItem` dumb component*  
+┃ ┃ ┃ ┗ `TodoList.test.tsx` - *Contains automated tests for the `TodoList` dumb component*  
+┃ ┃ ┣ **redux**  
+┃ ┃ ┃ ┣ **reducers**  
+┃ ┃ ┃ ┃ ┣ `add.test.tsx` - *Contains automated tests for the `add` reducer*  
+┃ ┃ ┃ ┃ ┣ `check.test.tsx` - *Contains automated tests for the `check` reducer*  
+┃ ┃ ┃ ┗ ┗ `remove.test.tsx` - *Contains automated tests for the `remove` reducer*  
+┃ ┃ ┣ **utils**  
+┃ ┃ ┃ ┣ `generateMockTodos.test.ts` - *Contains automated tests for the `generateMockTodos` utility function*  
+┃ ┃ ┃ ┗ `generateRandomNumbers.test.ts` - *Contains automated tests for the `generateRandomNumbers` utility function*  
+┃ ┃ ┗ `test-utils.tsx` - *Used for mocking the Redux store inside of the automated tests*  
+┃ ┣ **types**  
+┃ ┃ ┗ `Todo.type.ts` - *exports the shape of a TODO object*  
+┃ ┣ **utils** - *Contains utility functions used inside the automated tests*  
+┃ ┃ ┣ `generateMockTodos.tsx` - *Used to generate a predefined number of mock TODOs*  
+┗ ┗ ┗ `generateRandomNumbers.tsx` - *Used to generate a different types of random numbers*  
 
 
 ## Architecture

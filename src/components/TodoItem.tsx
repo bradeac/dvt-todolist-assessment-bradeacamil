@@ -11,19 +11,19 @@ type TodoItemProps = {
 export const TodoItem = ({ todo, onCheck, onDelete }: TodoItemProps) => {
   return (
     <article
-      aria-label="todo item"
+      aria-label="to do item"
       className="flex items-center justify-between mb-2"
     >
       <div className="flex flex-1 gap-2">
         <input
-          aria-label="todo checkbox"
+          aria-label="to do checkbox"
           checked={todo.completed}
           id={todo.id}
           onChange={() => onCheck(todo.id)}
           type="checkbox"
         />
         <label
-          aria-label="todo text"
+          aria-label="to do text"
           className={cn("max-w-60 text-left", {
             "line-through": todo.completed,
           })}
@@ -32,7 +32,10 @@ export const TodoItem = ({ todo, onCheck, onDelete }: TodoItemProps) => {
           {todo.value}
         </label>
       </div>
-      <button aria-label="todo delete button" onClick={() => onDelete(todo.id)}>
+      <button
+        aria-label="to do delete button"
+        onClick={() => onDelete(todo.id)}
+      >
         Delete
       </button>
     </article>

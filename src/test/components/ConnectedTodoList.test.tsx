@@ -2,7 +2,7 @@ import { fireEvent, screen } from "@testing-library/react";
 
 import { add } from "../../features/todos/todoListSlice";
 import { ConnectedTodoList } from "../../features/todos/ConnectedTodoList";
-import { renderWithProviders } from "../test-utils";
+import { renderWithProviders } from "../redux-test-utils";
 import { setupStore } from "../../app/store";
 
 const NUMBER_OF_TODOS = 10;
@@ -22,7 +22,7 @@ test("Expect ConnectedTodoList to be connected to Redux store and display TODOs"
   renderWithProviders(<ConnectedTodoList />, { store });
 
   const todosListSection = screen.getByRole("region", {
-    name: "todo list section",
+    name: "to do list section",
   });
 
   expect(todosListSection).toBeInTheDocument();
@@ -45,7 +45,9 @@ test("Expect to check a TODO from the store and change its completed state", asy
 
   renderWithProviders(<ConnectedTodoList />, { store });
 
-  const checkboxes = screen.getAllByRole("checkbox", { name: "todo checkbox" });
+  const checkboxes = screen.getAllByRole("checkbox", {
+    name: "to do checkbox",
+  });
 
   fireEvent.click(checkboxes[6]); // initially this TODO has completed: true
   fireEvent.click(checkboxes[9]); // initially this TODO has completed: false
@@ -74,7 +76,7 @@ test("Expect to click on the Delete button of a TODO and the TODO will be delete
   renderWithProviders(<ConnectedTodoList />, { store });
 
   const deleteButtons = screen.getAllByRole("button", {
-    name: "todo delete button",
+    name: "to do delete button",
   });
   const deletedToDoValue = `TODO item no. ${TODO_TO_BE_DELETED_INDEX}`;
 

@@ -25,18 +25,19 @@ export const AddTodoForm = ({ onAdd }: AddTodoFormProps) => {
   };
 
   return (
-    <form aria-label="add todo form" className="mb-16" onSubmit={handleAdd}>
+    <form aria-label="add to do form" className="mb-16" onSubmit={handleAdd}>
       <section className="flex items-center gap-4">
         <label htmlFor="todotextinput">I need to do:</label>
         <input
-          aria-label="todo text input"
+          aria-label="to do text input"
+          autoComplete="off"
           id="todotextinput"
           name="TODO text input"
           value={inputValue}
           onChange={handleInputChange}
         />
         <button
-          aria-label="add todo button"
+          aria-label="add to do button"
           disabled={!inputValue}
           type="submit"
         >

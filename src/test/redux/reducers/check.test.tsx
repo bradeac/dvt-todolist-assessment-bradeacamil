@@ -2,55 +2,56 @@ import reducer, {
   check,
   TodosState,
 } from "../../../features/todos/todoListSlice";
+import generateMockTodos from "../../../utils/generateMockTodos";
+import {
+  generateRandomEvenNumber,
+  generateRandomOddNumber,
+} from "../../../utils/generateRandomNumbers";
 
 const NUMBER_OF_TODOS = 10;
 
 test("Call check reducer with a TODO id and expect TODO completed attribute to be modified", () => {
-  const previousState: TodosState = {
-    todos: Array.from(Array(NUMBER_OF_TODOS).keys()).map((index) => {
-      return {
-        completed: index % 2 === 0 ? true : false,
-        id: index.toString(),
-        value: `TODO item no. ${index}`,
-      };
-    }),
-  };
-  const completedTodoIndex = 6;
-  const uncompletedTodoIndex = 9;
+  const completedTodoIndex = generateRandomEvenNumber(0, NUMBER_OF_TODOS - 1);
+  const uncompletedTodoIndex = generateRandomOddNumber(0, NUMBER_OF_TODOS - 1);
 
-  expect(
-    reducer(previousState, check({ id: completedTodoIndex.toString() }))
-  ).toEqual({
+  const initialState: TodosState = {
+    todos: generateMockTodos(NUMBER_OF_TODOS),
+  };
+  const expectedStateAfterCheckingCompletedTodo: TodosState = {
     todos: [
-      ...previousState.todos.slice(0, completedTodoIndex),
+      ...initialState.todos.slice(0, completedTodoIndex),
       {
-        // test if this completed TODO was modified into an uncompleted one
+        // this completed TODO should be modified into an uncompleted one
         completed: false,
         id: completedTodoIndex.toString(),
         value: `TODO item no. ${completedTodoIndex}`,
       },
-      ...previousState.todos.slice(
+      ...initialState.todos.slice(
         completedTodoIndex + 1,
-        previousState.todos.length
+        initialState.todos.length
       ),
     ],
-  });
-
-  expect(
-    reducer(previousState, check({ id: uncompletedTodoIndex.toString() }))
-  ).toEqual({
+  };
+  const expectedStateAfterCheckingUncompletedTodo: TodosState = {
     todos: [
-      ...previousState.todos.slice(0, uncompletedTodoIndex),
+      ...initialState.todos.slice(0, uncompletedTodoIndex),
       {
-        // test if this uncompleted TODO was modified into a completed one
+        // this uncompleted TODO should be modified into a completed one
         completed: true,
         id: uncompletedTodoIndex.toString(),
         value: `TODO item no. ${uncompletedTodoIndex}`,
       },
-      ...previousState.todos.slice(
+      ...initialState.todos.slice(
         uncompletedTodoIndex + 1,
-        previousState.todos.length
+        initialState.todos.length
       ),
     ],
-  });
+  };
+
+  expect(
+    reducer(initialState, check({ id: completedTodoIndex.toString() }))
+  ).toEqual(expectedStateAfterCheckingCompletedTodo);
+  expect(
+    reducer(initialState, check({ id: uncompletedTodoIndex.toString() }))
+  ).toEqual(expectedStateAfterCheckingUncompletedTodo);
 });
