@@ -91,3 +91,7 @@ Also, I included tests for the dumb components, which test if what's rendered on
 I also created a GitHub Actions [workflow file](https://github.com/bradeac/dvt-todolist-assessment-bradeacamil/blob/main/.github/workflows/main.yml) that runs the automated tests on each push to this repository.
 
 I also added a test badge at the top of this README file that shows the status of the last run of the automated tests.
+
+## Possible improvements
+
+I left a [PR](https://github.com/bradeac/dvt-todolist-assessment-bradeacamil/pull/12) unmerged with a nice-to-have improvement. I haven't merged it because it involves some styling changes that I don't like how they look. I explained a bit more what happens inside of the PR description.
