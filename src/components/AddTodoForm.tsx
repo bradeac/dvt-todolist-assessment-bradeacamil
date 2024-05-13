@@ -1,10 +1,7 @@
-import { v4 as uuid } from "uuid";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import { Todo } from "../types/Todo.type";
-
 type AddTodoFormProps = {
-  onAdd: (todo: Todo) => void;
+  onAdd: (todoText: string) => void;
 };
 
 export const AddTodoForm = ({ onAdd }: AddTodoFormProps) => {
@@ -15,7 +12,7 @@ export const AddTodoForm = ({ onAdd }: AddTodoFormProps) => {
 
     if (!inputValue) return;
 
-    onAdd({ completed: false, id: uuid(), value: inputValue });
+    onAdd(inputValue);
     setInputValue("");
   };
 
