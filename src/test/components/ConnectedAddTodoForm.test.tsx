@@ -9,8 +9,10 @@ test("Expect ConnectedAddTodoForm to be connected to Redux store and add a TODO 
   const store = setupStore();
   renderWithProviders(<ConnectedAddTodoForm />, { store });
 
-  const todoInput = screen.getByRole("textbox", { name: "todo text input" });
-  const addTodoButton = screen.getByRole("button", { name: "add todo button" });
+  const todoInput = screen.getByRole("textbox", { name: "to do text input" });
+  const addTodoButton = screen.getByRole("button", {
+    name: "add to do button",
+  });
 
   fireEvent.change(todoInput, { target: { value: "TODO item" } });
   fireEvent.click(addTodoButton);
@@ -38,8 +40,10 @@ test("Expect ConnectedAddTodoForm to be connected to Redux store and add a TODO 
 
   renderWithProviders(<ConnectedAddTodoForm />, { store });
 
-  const todoInput = screen.getByRole("textbox", { name: "todo text input" });
-  const addTodoButton = screen.getByRole("button", { name: "add todo button" });
+  const todoInput = screen.getByRole("textbox", { name: "to do text input" });
+  const addTodoButton = screen.getByRole("button", {
+    name: "add to do button",
+  });
 
   fireEvent.change(todoInput, { target: { value: "Added TODO item" } });
   fireEvent.click(addTodoButton);

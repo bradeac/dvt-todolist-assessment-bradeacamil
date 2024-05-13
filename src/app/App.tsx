@@ -6,7 +6,7 @@ import "./App.css";
 function App() {
   return (
     <main>
-      <h1 className="mb-16">TODO List</h1>
+      <h1 className="mb-16">To Do List</h1>
       <AddToDoForm />
       <TodoList />
     </main>
