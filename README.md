@@ -4,8 +4,8 @@ Automated tests status: [![GitHub Actions Test Run](https://github.com/bradeac/d
 
 ## Run locally
 
-- npm i
-- npm run dev
+- `npm i`
+- `npm run dev`
 
 ## Features
 
