@@ -1,32 +1,85 @@
-# React + TypeScript + Vite
+# TODO list app
 
-[![GitHub Actions Test Run](https://github.com/bradeac/dvt-todolist-assessment-bradeacamil/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/bradeac/dvt-todolist-assessment-bradeacamil/actions/workflows/main.yml)
+Automated tests status: [![GitHub Actions Test Run](https://github.com/bradeac/dvt-todolist-assessment-bradeacamil/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/bradeac/dvt-todolist-assessment-bradeacamil/actions/workflows/main.yml)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Run locally
 
-Currently, two official plugins are available:
+- npm i
+- npm run dev
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+The TODO app starts with an empty list of TODOs.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+You can add as many TODOs as you want. Each TODO can be clicked in order to be marked as done and also each TODO can be deleted.
 
-- Configure the top-level `parserOptions` property like this:
+TODOs aren't stored when the windows is closed.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Tech stack
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Vite (to scaffold the project)
+- React
+- Typescript
+- Redux-Toolkit
+- TailwindCSS
+- React Testing Library
+
+## Folder structure
+
+I went with the best-practice recommended in the Redux docs. Have a `feature` folder where you have a folder for each feature of the app, each feature being represented by a Redux slice. In this particular case, it might be a bit overkill, but on the other hand, it's quite easy to extend this TODO list app and add other features to it because of this folder structure.
+
+┣ src  
+┃ ┣ app  
+┃ ┃ ┣ `App.css` - containing some general styles applied to the whole app  
+┃ ┃ ┗ `App.tsx` - rendering the `main` element, containing the app header, add TODO form, and TODO list  
+┃ ┃ ┗ `store.ts` - containing the Redux store  
+┃ ┣ components - contains dumb UI components  
+┃ ┃ ┣ `AddTodoForm.tsx` - renders the UI part of the form used to add TODOs  
+┃ ┃ ┣ `TodoItem.tsx` - renders a TODO item  
+┃ ┃ ┗ `TodoList.tsx` - renders a list of `TodoItem`s  
+┃ ┣ features  
+┃ ┃ ┗ todos - contains the Redux slice used to store TODOs and Redux-connected components  
+┃ ┃ ┃ ┣ `ConnectedAddTodoForm.tsx` - Redux-connected component containing the interactivity logic for adding a TODO. It renders the dumb `AddTodoForm` component and adding to it interactivity and a link to the Redux store  
+┃ ┃ ┃ ┣ `ConnectedTodoList.tsx` - Redux-connected component that renders the dumb `TodoList` component  
+┃ ┃ ┃ ┗ `todoListSlice.tsx` - Contains the reducers and an interface represnting the shape of the state stored by Redux  
+┃ ┣ test  
+┃ ┃ ┣ components  
+┃ ┃ ┃ ┣ `AddTodoForm.test.tsx` - Contains automated tests for the `AddTodoForm` dumb component  
+┃ ┃ ┃ ┣ `ConnectedAddTodoForm.test.tsx` - Contains automated tests for the `ConnectedAddTodoForm` component  
+┃ ┃ ┃ ┣ `ConnectedTodoList.test.tsx` - Contains automated tests for the `ConnectedTodoList` component  
+┃ ┃ ┃ ┣ `TodoItem.test.tsx` - Contains automated tests for the `TodoItem` dumb component  
+┃ ┃ ┃ ┗ `TodoList.test.tsx` - Contains automated tests for the `TodoList` dumb component  
+┃ ┃ ┣ redux  
+┃ ┃ ┃ ┣ reducers  
+┃ ┃ ┃ ┃ ┣ `add.test.tsx` - Contains automated tests for the `add` reducer  
+┃ ┃ ┃ ┃ ┣ `check.test.tsx` - Contains automated tests for the `check` reducer  
+┃ ┃ ┃ ┃ ┗ `remove.test.tsx` - Contains automated tests for the `remove` reducer  
+┃ ┃ ┗ `test-utils.tsx` - Used for mocking the Redux store inside of the automated tests  
+┗ ┣ types  
+┃ ┃ ┗ `Todo.type.ts` - exports the shape of a TODO object  
+
+
+## Architecture
+
+Even though this is a simple app, I tried to follow industry best practices. Some of them might be overkill for a TODO app, but I think it's more important to show, as a candidate, that you are aware of best practices and you know how to apply them, instead of not doing it and just talk about them during the technical call.
+
+For example, for this app, I could have consumed the Redux store and dispatched actions to it directly from components like `AddTodoForm` or `TodoList`. This would have sped up the development time, but this would have resulted in coupled code, which is harder to test from multiple angles.
+
+In order to make the codebase as decoupled and as testable as possible, I decided to break the components into two separate types:
+- dumb UI components
+  - these components only render markup, without having any logic or interactivity inside of them
+  - because they are not coupled to Redux and receive all they need through props, it's very easy to test these components, and it's also very easy to swap them with a different component, as long as the props are the same
+- Redux-connected components
+  - these components are coupled to the Redux store
+  - they include event handlers and other logic related to the app
+  - they render the dumb UI components to which they pass down the data and event handlers
+  - in order to test these components, the Redux store is mocked
+
+No matter if you want to swap one of the dumb components with a new one, or maybe you want to swap Redux with another state management library, the UI part and the state and logic part are pretty decoupled, so it's easy to do that.
+Also, I included tests for the dumb components, which test if what's rendered on the screen is correct. And I also included tests related to the Redux-connected components, the Redux store, and the Redux reducers, in order to be sure that the initial state value is correct, that the update logic is correct, and also that the Redux-connected components are correctly connected to the Redux store.
+
+## Continuous integration
+
+I also created a GitHub Actions [workflow file](https://github.com/bradeac/dvt-todolist-assessment-bradeacamil/blob/main/.github/workflows/main.yml) that runs the automated tests on each push to this repository.
+
+I also added a test badge at the top of this README file that shows the status of the last run of the automated tests.
