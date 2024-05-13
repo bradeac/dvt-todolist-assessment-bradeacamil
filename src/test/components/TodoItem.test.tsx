@@ -76,15 +76,15 @@ test("Expect completed TODO to be rendered as checked", async () => {
   expect(screen.getByRole("checkbox")).toBeChecked();
 });
 
-test("Expect uncompleted TODO to be rendered without text-decoration: line-through", async () => {
+test("Expect uncompleted TODO to be rendered without todo-text-active class", async () => {
   render(
     <TodoItem todo={mock} onCheck={mockOnCheck} onDelete={mockOnDelete} />
   );
 
-  expect(screen.getByText(mock.value)).not.toHaveClass("line-through");
+  expect(screen.getByText(mock.value)).not.toHaveClass("todo-text-active");
 });
 
-test("Expect completed TODO to be rendered with text-decoration: line-through", async () => {
+test("Expect completed TODO to be rendered with todo-text-active class", async () => {
   render(
     <TodoItem
       todo={{
@@ -96,7 +96,7 @@ test("Expect completed TODO to be rendered with text-decoration: line-through", 
     />
   );
 
-  expect(screen.getByText(mock.value)).toHaveClass("line-through");
+  expect(screen.getByText(mock.value)).toHaveClass("todo-text-active");
 });
 
 test("Expect onCheck to be called when clicking on a TODO checkbox", async () => {
