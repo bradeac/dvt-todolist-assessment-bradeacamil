@@ -7,6 +7,10 @@ Automated tests status: [![GitHub Actions Test Run](https://github.com/bradeac/d
 - `npm i`
 - `npm run dev`
 
+#### Run tests locally: 
+
+- `npm run test`
+
 ## Features
 
 The TODO app starts with an empty list of TODOs.
